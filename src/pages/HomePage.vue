@@ -2,6 +2,9 @@
   <div class="hello">
     HomePage
     <button src="#"><router-link to="/results" >Go to resultsPage</router-link></button>
+  <div>
+    <input-item></input-item>
+  </div>
   </div>
 </template>
 

@@ -6,9 +6,11 @@
     ResultsPage
     <button src="#"><router-link to="/" >Go back to HomePage</router-link></button>
   </div>
+
 </template>
 
 <script>
+
 export default {
   name: 'HelloWorld',
   data() {
