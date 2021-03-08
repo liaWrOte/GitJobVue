@@ -2,7 +2,7 @@
   <div class="hello">
     HomePage
     <button src="#"><router-link to="/results" >Go to resultsPage</router-link></button>
-    <inputItem placeholder='salut'/>
+    <inputItem inputPlaceholder='salut'/>
   </div>
 </template>
 
