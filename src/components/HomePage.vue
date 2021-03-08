@@ -2,12 +2,12 @@
   <div class="hello">
     HomePage
     <button src="#"><router-link to="/results" >Go to resultsPage</router-link></button>
-    <inputItem inputPlaceholder='salut'/>
+    <inputItem :inputPlaceholder="'salut'" />
   </div>
 </template>
 
 <script>
-import inputItem from '../components/Input/InputItem.vue';
+import inputItem from './Input/InputItem';
 
 export default {
   name: 'HelloWorld',
