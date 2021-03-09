@@ -2,32 +2,43 @@
   <div class="hello" >
     HomePage
     <button src="#"><router-link to="/results" >Go to resultsPage</router-link></button>
-    <inputItem :inputPlaceholder="'Votre recherche ici'" v-model="getValue"/>
-    <p v-on:childToParent="getSearchFromInputChild ($event)">{{ searchFromInputChild }}</p>
+    <input
+    type="text"
+    id="name"
+    class="input"
+    placeholder="Votre recherche ici"
+    v-model="newSearch"
+    @keyup.enter="launchSearch"
+    />
+    <div v-if="hasResults">
+      <p>test</p>
+      <li v-for="resultTerm in searchResults[1]" :key="resultTerm">
+        {{ resultTerm }}
+      </li>
+    </div>
   </div>
+
 </template>
 
 <script>
 import axios from 'axios';
-import inputItem from './Input/InputItem';
 
 export default {
   name: 'HelloWorld',
-  components: {
-    inputItem,
-  },
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
-      searchFromInputChild: [],
+      newSearch: '',
+      searchResults: null,
+      hasResults: false,
     };
   },
   methods: {
     getValue(value) {
       console.log(value);
     },
-    getSearchFromInputChild(recivedData) {
-      console.log('searchTermInParent', recivedData);
+    changeResultsStatus() {
+      this.hasResults = !this.hasResults;
     },
     launchSearch() {
       axios({
@@ -36,14 +47,17 @@ export default {
         origin: 'http://www.mediawiki.org',
       })
         .then((response) => {
-          this.searchResult.push(response.data);
-          this.$emit('childToParentData', this.searchResult);
-          console.log(this.searchResult);
+          this.searchResults = response.data;
+          console.log('results', this.searchResults);
+          console.log('resultStatus', this.hasResults);
+          console.log(this.newSearch);
         })
         .catch((error) => {
           console.log(error);
         })
         .finally(() => {
+          this.changeResultsStatus();
+          console.log('resultStatus', this.hasResults);
           console.log('finally');
         });
     },
